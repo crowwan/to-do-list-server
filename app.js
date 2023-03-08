@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const supabase = require("./model/supabaseClient.js");
 const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
 require("dotenv").config();
 
 const corsOptions = {
@@ -13,6 +14,7 @@ const app = express();
 
 const userRouter = require("./router/userRouter");
 
+app.use(morgan("tiny"));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +22,7 @@ app.use(cookieParser());
 
 app.get("/", async (req, res) => {
   const { data, error } = await supabase.from("test").select("*");
-  response.send(data);
+  res.send(data);
 });
 
 app.use("/user", userRouter);
