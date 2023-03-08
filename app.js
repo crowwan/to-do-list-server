@@ -1,17 +1,30 @@
 const express = require("express");
 const cors = require("cors");
 const supabase = require("./model/supabaseClient.js");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+};
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+const userRouter = require("./router/userRouter");
 
-app.get("/", async (request, response) => {
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.get("/", async (req, res) => {
   const { data, error } = await supabase.from("test").select("*");
   response.send(data);
 });
+
+app.use("/user", userRouter);
+
 app.listen(process.env.PORT, () => {
   console.log(`listening on ${process.env.PORT}`);
 });
