@@ -40,7 +40,7 @@ router.get("/userinfo", async (req, res) => {
     delete user.password;
     res.status(200).json({
       success: true,
-      data: user,
+      data: user.uid,
     });
   }
 });
