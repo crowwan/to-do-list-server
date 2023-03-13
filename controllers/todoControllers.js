@@ -1,5 +1,6 @@
 const supabase = require("../model/supabaseClient");
 const TABLE = "todos";
+
 module.exports = {
   createTodos: async (req, res) => {
     const body = { ...req.body };

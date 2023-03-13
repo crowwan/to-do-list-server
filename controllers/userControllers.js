@@ -44,7 +44,6 @@ module.exports = {
     res.redirect("/userinfo");
   },
   logOut: (req, res) => {
-    console.log("test");
     res.clearCookie("userId", cookieOptions);
     res.status(205).send("cookie deleted - log out");
   },
