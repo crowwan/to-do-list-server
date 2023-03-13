@@ -13,6 +13,7 @@ const corsOptions = {
 const app = express();
 
 const userRouter = require("./router/userRouter");
+const todoRouter = require("./router/todoRouter");
 
 app.use(morgan("tiny"));
 app.use(cors(corsOptions));
@@ -26,6 +27,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/user", userRouter);
+app.use("/todos", todoRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`listening on ${process.env.PORT}`);
