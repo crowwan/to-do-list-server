@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const supabase = require("./model/supabaseClient.js");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 require("dotenv").config();
