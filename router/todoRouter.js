@@ -16,17 +16,21 @@ router.get("/", async (req, res) => {
     .from(TABLE)
     .select("*")
     .eq("uid", req.uid);
-
+  if (error) {
+    return res.status(500).send("Cannot get data from db");
+  }
   return res.status(200).send(data);
 });
 
 router.post("/:id", async (req, res) => {
   const body = req.body;
-  const { data, error } = await supabase
-    .from(TABLE)
-    .update(body)
-    .eq("uid", req.uid);
+  const { error } = await supabase.from(TABLE).update(body).eq("id", id);
+  if (error) {
+    return res.status(500).send("Cannot update data from db");
+  }
   return res.status(200).send("ok");
 });
+
+router.delete("/:id", async (req, res) => {});
 
 module.exports = router;
