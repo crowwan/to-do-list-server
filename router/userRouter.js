@@ -18,6 +18,9 @@ router.get("/", (req, res) => {
 });
 router.post("/login", async (req, res) => {
   const { data, error } = await supabase.from(TABLE).select("*");
+  if (error) {
+    return res.status(500).send("Cannot get data from db");
+  }
   const { uid, password } = req.body;
   const hashedPassword = makeHashed(password);
   const user = {
@@ -55,7 +58,7 @@ router.post("/signup", async (req, res) => {
     .select();
 
   if (error) {
-    return res.status(401).send("Cannot Sign up");
+    return res.status(500).send("Cannot create user to db");
   }
 
   res.cookie("userId", data[0].uid, cookieOptions);
