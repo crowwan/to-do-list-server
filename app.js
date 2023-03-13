@@ -21,9 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", async (req, res) => {
-  const { data, error } = await supabase.from("test").select("*");
-  res.send(data);
+app.get("/", (req, res) => {
+  res.send("ok");
 });
 
 app.use("/user", userRouter);
