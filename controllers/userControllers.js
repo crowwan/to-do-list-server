@@ -6,7 +6,7 @@ const TABLE = "users";
 const makeHashed = (a) => crypto.createHash("sha256").update(a).digest("hex");
 
 const cookieOptions = {
-  domain: "localhost:3000",
+  domain: "localhost",
   path: "/",
   httpOnly: true,
 };
@@ -23,7 +23,6 @@ module.exports = {
       ...data.find((a) => a.uid === uid && a.password === hashedPassword),
     };
     if (!user) return res.status(401).send("user not found");
-
     res.cookie("userId", uid, cookieOptions);
     res.redirect("/user/userinfo");
   },
@@ -48,10 +47,10 @@ module.exports = {
     res.status(205).send("cookie deleted - log out");
   },
   getUserInfo: async (req, res) => {
-    const userId = req.cookies?.userId;
+    const userId = req.cookies.userId;
     const { data, error } = await supabase.from("users").select("*");
     const user = { ...data.find((a) => a.uid === userId) };
-
+    console.log(userId);
     if (!userId || !user.uid) {
       return res.status(401).send("Not Authorized");
     } else {
