@@ -18,6 +18,7 @@ module.exports = {
       return res.status(500).send("Cannot get data from db");
     }
     const { uid, password } = req.body;
+    if (!uid || !password) return res.status(401).send("invalid user data");
     const hashedPassword = makeHashed(password);
     const user = {
       ...data.find((a) => a.uid === uid && a.password === hashedPassword),
@@ -50,7 +51,7 @@ module.exports = {
     const userId = req.cookies.userId;
     const { data, error } = await supabase.from("users").select("*");
     const user = { ...data.find((a) => a.uid === userId) };
-    console.log(userId);
+
     if (!userId || !user.uid) {
       return res.status(401).send("Not Authorized");
     } else {

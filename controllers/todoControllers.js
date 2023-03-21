@@ -5,11 +5,11 @@ module.exports = {
   createTodos: async (req, res) => {
     const body = { ...req.body };
     if (!body.uid) body.uid = req.uid;
-    const { error } = await supabase.from(TABLE).insert(body);
+    const { data, error } = await supabase.from(TABLE).insert(body).select();
     if (error) {
       return res.status(500).send("Cannot create todo");
     }
-    return res.status(201).send("created completed");
+    return res.status(201).send(data);
   },
   getTodos: async (req, res) => {
     const { data, error } = await supabase
