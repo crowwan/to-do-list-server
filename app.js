@@ -8,6 +8,9 @@ const corsOptions = {
   origin: "https://d28pa5c8zqo8q9.cloudfront.net",
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: "Content-Type,Authorization",
 };
 const app = express();
 
