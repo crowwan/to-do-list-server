@@ -6,7 +6,7 @@ const TABLE = "users";
 const makeHashed = (a) => crypto.createHash("sha256").update(a).digest("hex");
 
 const cookieOptions = {
-  domain: "localhost",
+  domain: ".compute.amazonaws.com",
   path: "/",
   httpOnly: true,
 };
