@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 });
 router.put("/login", logIn);
 
-router.get("/userinfo", getUserInfo);
+router.put("/userinfo", getUserInfo);
 
 router.put("/signup", signUp);
 
