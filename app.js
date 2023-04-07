@@ -10,7 +10,7 @@ const corsOptions = {
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
   preflightContinue: false,
   optionsSuccessStatus: 204,
-  allowedHeaders: "Content-Type,Authorization",
+  allowedHeaders: "Content-Type,Authorization,Cookie",
 };
 const app = express();
 
