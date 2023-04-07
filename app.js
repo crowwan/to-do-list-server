@@ -5,7 +5,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "/",
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
 };

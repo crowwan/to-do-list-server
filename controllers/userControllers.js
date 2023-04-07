@@ -50,6 +50,7 @@ module.exports = {
   getUserInfo: async (req, res) => {
     const userId = req.cookies.userId;
     const { data, error } = await supabase.from("users").select("*");
+    console.log(userId);
     const user = { ...data.find((a) => a.uid === userId) };
 
     if (!userId || !user.uid) {
