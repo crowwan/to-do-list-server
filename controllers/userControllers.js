@@ -9,8 +9,6 @@ const cookieOptions = {
   domain: "ec2-54-180-116-211.ap-northeast-2.compute.amazonaws.com",
   path: "/",
   httpOnly: true,
-  sameSite: "none",
-  secure: true,
 };
 
 module.exports = {
