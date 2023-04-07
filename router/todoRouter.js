@@ -8,7 +8,7 @@ const {
 } = require("../controllers/todoControllers");
 
 router.use((req, res, next) => {
-  const uid = req.cookies?.userId;
+  const uid = req.cookies.userId;
   if (!uid) return res.status(401).send("Not Authorized");
   req.uid = uid;
   next();
