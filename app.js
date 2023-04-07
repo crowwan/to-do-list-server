@@ -5,7 +5,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "https://precious-sawine-ce36fa.netlify.app/",
+  origin: "*",
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
   preflightContinue: false,
