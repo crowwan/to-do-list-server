@@ -5,12 +5,9 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "https://precious-sawine-ce36fa.netlify.app",
+  origin: "http://localhost:3000",
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: "Content-Type,Authorization",
 };
 const app = express();
 
