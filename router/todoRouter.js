@@ -16,9 +16,9 @@ router.use((req, res, next) => {
 
 router.get("/", getTodos);
 
-router.post("/", createTodos);
+router.put("/", createTodos);
 
-router.post("/:id", updateTodos);
+router.put("/:id", updateTodos);
 
 router.delete("/:id", deleteTodos);
 

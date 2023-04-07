@@ -10,12 +10,12 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.send("user");
 });
-router.post("/login", logIn);
+router.put("/login", logIn);
 
 router.get("/userinfo", getUserInfo);
 
-router.post("/signup", signUp);
+router.put("/signup", signUp);
 
-router.post("/logout", logOut);
+router.put("/logout", logOut);
 
 module.exports = router;
