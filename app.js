@@ -31,6 +31,9 @@ app.get("/", function (req, res) {
 
 app.use("/user", userRouter);
 app.use("/todos", todoRouter);
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "/to-do-list/build/index.html"));
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`listening on ${process.env.PORT}`);
