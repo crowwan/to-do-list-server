@@ -5,21 +5,19 @@ const morgan = require("morgan");
 const path = require("path");
 require("dotenv").config();
 
-// const corsOptions = {
-//   origin: "https://master--precious-sawine-ce36fa.netlify.app",
-//   credentials: true,
-//   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-//   allowedHeaders: "Content-Type,Authorization,Cookie",
-// };
+const corsOptions = {
+  origin: "http://crowwan-pre-project.s3-website.ap-northeast-2.amazonaws.com",
+  credentials: true,
+  methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+  allowedHeaders: "Content-Type,Authorization,Cookie",
+};
 const app = express();
 
 const userRouter = require("./router/userRouter");
 const todoRouter = require("./router/todoRouter");
 
 app.use(morgan("tiny"));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
