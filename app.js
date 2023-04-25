@@ -6,7 +6,7 @@ const path = require("path");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "http://crowwan-pre-project.s3-website.ap-northeast-2.amazonaws.com",
+  origin: "http://localhost:3000",
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
   allowedHeaders: "Content-Type,Authorization,Cookie",
@@ -15,7 +15,8 @@ const app = express();
 
 const userRouter = require("./router/userRouter");
 const todoRouter = require("./router/todoRouter");
-
+const questionRouter = require("./router/questionRouter");
+const answerRouter = require("./router/answerRouter");
 app.use(morgan("tiny"));
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -29,6 +30,8 @@ app.get("/", function (req, res) {
 
 app.use("/user", userRouter);
 app.use("/todos", todoRouter);
+app.use("/questions", questionRouter);
+app.use("/answer", answerRouter);
 
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "/to-do-list/build/index.html"));
