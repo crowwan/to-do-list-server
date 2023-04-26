@@ -9,8 +9,10 @@ module.exports = {
       .from(TABLE)
       .insert(question)
       .select("*");
+
     if (tag.length > 0) {
       const tags = await supabase.from("tags").insert(tag).select();
+
       const qt = await supabase.from("question_tag").insert(
         tags.data.map((a) => ({
           question_id: data[0].question_id,
@@ -42,6 +44,25 @@ module.exports = {
     resData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     return res.status(200).send(resData);
+  },
+  getNewQuestions: async (req, res) => {
+    const { data, error } = await supabase.from("questions")
+      .select(`*,answers:answers(*),tags:question_tag(
+        tags(
+          name
+        )
+      )`);
+    if (error) {
+      return res.status(500).send("Cannot get data from db");
+    }
+    const resData = data.map((a) => ({
+      ...a,
+      tags: a.tags.map((tag) => tag.tags.name),
+    }));
+
+    resData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    return res.status(200).send(resData.slice(0, 20));
   },
   updateQuestion: async (req, res) => {
     const { id } = req.params;

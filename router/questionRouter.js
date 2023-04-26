@@ -5,6 +5,7 @@ const {
   updateQuestion,
   deleteQuestion,
   createQuestion,
+  getNewQuestions,
 } = require("../controllers/questionControllers");
 const { verifyToken } = require("../controllers/helper/tokenFunctions");
 
@@ -19,6 +20,8 @@ router.use((req, res, next) => {
 });
 
 router.get("/", getQuestions);
+
+router.get("/newest", getNewQuestions);
 
 router.post("/", createQuestion);
 
