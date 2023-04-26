@@ -25,8 +25,8 @@ module.exports = {
     const user = {
       ...data.find((a) => a.email === email && a.password === password),
     };
-
-    if (!user) return res.status(401).send("user not found");
+    if (Object.keys(user).length === 0)
+      return res.status(500).send("user not found");
 
     const result = generateToken({ id: user.id, email });
 
@@ -53,14 +53,12 @@ module.exports = {
     res.status(205).send("cookie deleted - log out");
   },
   getUserInfo: async (req, res) => {
-    console.log(req.header("Authorization"));
     const token = req.header("Authorization");
     const accessTokenPayload = verifyToken("access", token);
 
     if (!accessTokenPayload) return res.status(401).send("Not Authorized");
     const email = accessTokenPayload.email;
     const { data, error } = await supabase.from(TABLE).select("*");
-    console.log(data);
     const user = { ...data.find((a) => a.email === email) };
 
     if (!email || !user.email) {
