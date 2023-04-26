@@ -6,7 +6,7 @@ const path = require("path");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://crowwan-pre-project.s3-website.ap-northeast-2.amazonaws.com",
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
   allowedHeaders: "Content-Type,Authorization,Cookie",
