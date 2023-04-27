@@ -12,7 +12,7 @@ module.exports = {
 
     if (tag.length > 0) {
       const tags = await supabase.from("tags").insert(tag).select();
-
+      if (tags.error) return res.status(501).send("Cannot create question");
       const qt = await supabase.from("question_tag").insert(
         tags.data.map((a) => ({
           question_id: data[0].question_id,
