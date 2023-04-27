@@ -4,7 +4,7 @@ const TABLE = "questions";
 module.exports = {
   createQuestion: async (req, res) => {
     const question = { ...req.body.question };
-    const tag = [...req.body.tag];
+    const tag = [...req.body.tag].filter((a) => a.name.length > 0);
     const { data, error } = await supabase
       .from(TABLE)
       .insert(question)
